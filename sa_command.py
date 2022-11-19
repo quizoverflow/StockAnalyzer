@@ -10,10 +10,10 @@ class pop_New_Window():
         
         if window_name == "내 주식 설정":
             setMystock(window_name,origin)
-        elif window_name == "나의 승률 분석":
+        elif window_name == "주식 분석":
             analyze_myData(window_name,origin)
 
-        elif window_name == "추천주 승률 분석":
+        elif window_name == "주식 분석 레포트":
             analyze_research(window_name,origin)
         else:
             newWin = Toplevel(origin)

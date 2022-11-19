@@ -38,16 +38,16 @@ def delStock(entry_name,listbox_name):
 def get_list(listbox_name):
     global stocklist
     try:
-        stockFile = open(f"{os.path.dirname(os.path.abspath(__file__))}/My_current_stock_list.txt",'r')
-        while True:
-            line = stockFile.readline()
-            if line == "\n":
-                continue
-            if not line:
-                break
-            stocklist.append(str(line).strip())
-        stocklist = list(set(stocklist))
-        show_stocklist_listbox(listbox_name)
+        with open(f"{os.path.dirname(os.path.abspath(__file__))}\My_current_stock_list.txt",'r') as stockFile:
+            while True:
+                line = stockFile.readline()
+                if line == "\n":
+                    continue
+                if not line:
+                    break
+                stocklist.append(str(line).strip())
+            stocklist = list(set(stocklist))
+            show_stocklist_listbox(listbox_name)
     except:
         showinfo("..0o0..","저장된 종목 파일이 없습니다\n종목을 추가하고, 적용하기를 눌러주세요")
     
@@ -79,6 +79,8 @@ def setMystock(win_name,org):
     content_main_Label = Label(contentframe, text = "종목 입력란", width = 30, height =2)
     content_stock_entry = Entry(contentframe)
     content_current_list = Listbox(stockframe, yscrollcommand=sbar_verti.set,width =35,height = 15)
+    
+    get_list(content_current_list)
 
     btn_get = Button(refreshframe,text = "불러오기", width = 15, height = 1,command = lambda:get_list(content_current_list))
     btn_apply = Button(refreshframe,text = "적용",width = 15, height = 1,command = apply_list)
